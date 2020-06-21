@@ -10,21 +10,23 @@
     <br/>
     <input
 
-    type="password"
-    name="password"
-    v-model="password"
-    placeholder="password "
+      type="password"
+      name="password"
+      v-model="password"
+      placeholder="password "
     >
     <br/>
     <button
       type="submit"
       @click="register"
-    >Register</button>
+    >Register
+    </button>
   </div>
 </template>
 
 <script>
   import AuthenticationService from "../services/AuthenticationService";
+
   export default {
     name: "Register",
     data() {
@@ -33,15 +35,15 @@
         password: '123'
       }
     },
-    watch:{
-      email (value){
+    watch: {
+      email(value) {
         console.log('Email has changed value', value)
       }
     },
     methods: {
-     async register(){
+      async register() {
         await AuthenticationService.register({
-          email:  this.email,
+          email: this.email,
           password: this.password
         })
 
