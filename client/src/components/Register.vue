@@ -1,62 +1,95 @@
 <template>
-  <div>
-    <h1>Register</h1>
-    <input
-      type="email"
-      name="email"
-      v-model="email"
-      placeholder="email "
-    >
-    <br/>
-    <input
+  <v-app id="inspire">
+    <v-main>
+      <v-container
+        class="fill-height"
+        fluid
+      >
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            cols="12"
+            sm="8"
+            md="4"
+          >
+            <v-card class="elevation-12">
+              <v-toolbar
+                color="primary"
+                dark
+                flat
+              >
+                <v-toolbar-title>Login form</v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <v-text-field
+                    label="Email"
+                    name="Email"
+                    prepend-icon="mdi-account"
+                    v-model="email"
+                    type="email"
+                  ></v-text-field>
 
-      type="password"
-      name="password"
-      v-model="password"
-      placeholder="password "
-    >
-    <br/>
-    <button
-      type="submit"
-      @click="register"
-    >Register
-    </button>
-  </div>
+                  <v-text-field
+                    id="password"
+                    label="Password"
+                    v-model="password"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                  ></v-text-field>
+                  <div class="error" v-html="error"/>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" type="submit" @click="register">Login</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-  import AuthenticationService from "../services/AuthenticationService";
 
-  export default {
-    name: "Register",
-    data() {
-      return {
-        email: 'avd',
-        password: '123'
-      }
-    },
-    watch: {
-      email(value) {
-        console.log('Email has changed value', value)
-      }
-    },
-    methods: {
-      async register() {
-        await AuthenticationService.register({
-          email: this.email,
-          password: this.password
+import AuthenticationService from '../services/AuthenticationService'
+
+export default {
+  name: 'Register',
+  data () {
+    return {
+      email: 'avd',
+      password: '123',
+      error: null
+    }
+  },
+  watch: {
+    email (value) {
+      console.log('Email has changed value', value)
+    }
+  },
+  methods: {
+    register () {
+      const vm = this
+      AuthenticationService.register({
+        email: this.email,
+        password: this.password
+      }).then(r => r)
+        .catch(e => {
+          vm.error = e.response.data.error
         })
-
-      }
-    },
-    mounted() {
-      setTimeout(() => {
-        this.email = 'Hello world!'
-      }, 1000)
     }
   }
+}
 </script>
 
 <style scoped>
-
+  .error {
+    color: red
+  }
 </style>
