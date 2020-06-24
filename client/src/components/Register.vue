@@ -40,7 +40,7 @@
                     prepend-icon="mdi-lock"
                     type="password"
                   ></v-text-field>
-                  <div class="error" v-html="error"/>
+                  <div class="errora" v-html="error" />
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -65,7 +65,7 @@ export default {
     return {
       email: 'avd',
       password: '123',
-      error: null
+      error: ''
     }
   },
   watch: {
@@ -75,21 +75,29 @@ export default {
   },
   methods: {
     register () {
+      this.error = ''
       const vm = this
       AuthenticationService.register({
         email: this.email,
         password: this.password
-      }).then(r => r)
+      }).then((value) => {
+        vm.clearForm();
+        return value
+      })
         .catch(e => {
           vm.error = e.response.data.error
         })
+    },
+    clearForm () {
+      this.email = '',
+              this.password = ''
     }
   }
 }
 </script>
 
 <style scoped>
-  .error {
-    color: red
-  }
+.errora{
+  color:red;
+}
 </style>
