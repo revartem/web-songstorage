@@ -1,6 +1,13 @@
 <template>
+
   <v-app id="inspire">
+
     <v-main>
+      <v-flex xs12>
+        <v-alert type="error" :value="error" dismissible
+        >{{error}}</v-alert
+        >
+      </v-flex>
       <v-container
         class="fill-height"
         fluid
@@ -40,7 +47,6 @@
                     prepend-icon="mdi-lock"
                     type="password"
                   ></v-text-field>
-                  <div class="errora" v-html="error" />
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -63,9 +69,9 @@ export default {
   name: 'Register',
   data () {
     return {
-      email: 'avd',
-      password: '123',
-      error: ''
+      email: '',
+      password: '',
+      error: null
     }
   },
   watch: {
