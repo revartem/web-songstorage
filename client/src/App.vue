@@ -1,19 +1,21 @@
 <template>
   <v-app>
-    <v-content>
+    <site-header></site-header>
+    <v-container fluid>
       <router-view></router-view>
-    </v-content>
+    </v-container>
   </v-app>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld';
+import  SiteHeader from  './components/Header'
 
 export default {
   name: 'App',
 
   components: {
-    // HelloWorld,
+    SiteHeader
   },
 
   data: () => ({
@@ -21,3 +23,6 @@ export default {
   }),
 };
 </script>
+<style scoped>
+
+</style>

@@ -27,7 +27,7 @@
                 dark
                 flat
               >
-                <v-toolbar-title>Register</v-toolbar-title>
+                <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -51,7 +51,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="green" type="submit" dark @click="register">Register</v-btn>
+                <v-btn class="green" type="submit" dark @click="login">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -80,10 +80,10 @@ export default {
     }
   },
   methods: {
-    register () {
+    login () {
       this.error = ''
       const vm = this
-      AuthenticationService.register({
+      AuthenticationService.login({
         email: this.email,
         password: this.password
       }).then((value) => {
