@@ -7,6 +7,9 @@
         <v-alert type="error" :value="error" dismissible
         >{{error}}</v-alert
         >
+        <v-alert type="positive" class="green" :value="positive" dismissible
+        >{{positive}}</v-alert
+        >
       </v-flex>
       <v-container
         class="fill-height"
@@ -71,7 +74,8 @@ export default {
     return {
       email: '',
       password: '',
-      error: null
+      error: null,
+      positive: null
     }
   },
   watch: {
@@ -81,22 +85,29 @@ export default {
   },
   methods: {
     register () {
-      this.error = ''
       const vm = this
       AuthenticationService.register({
         email: this.email,
         password: this.password
       }).then((value) => {
         vm.clearForm();
+        vm.positive = 'User was successfully created'
         return value
       })
         .catch(e => {
-          vm.error = e.response.data.error
+          if(e == null){
+            return
+          }else {
+            console.log(e)
+            vm.error = e.response.data.error
+          }
         })
     },
     clearForm () {
-      this.email = '',
+      this.email = ''
               this.password = ''
+              this.error = null
+              this.positive = null
     }
   }
 }

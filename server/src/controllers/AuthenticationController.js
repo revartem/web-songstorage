@@ -1,7 +1,6 @@
 const {User} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
-var bcrypt = require('bcrypt');
 
 
 function jwtSingUser(user) {
@@ -37,15 +36,11 @@ module.exports = {
                     error: 'Login information is incorrect'
                 })
             }
-            bcrypt.compare(password, user.password)
-                .then(r => {
-                    console.log(r)
-                })
-                .catch(e => console.log(e))
 
-            // const validPw = await user.comparePassword(password)
-            console.log(pwCheck)
-            if (!pwCheck) {
+
+            const validPw = await user.comparePassword(password)
+            console.log(validPw)
+            if (!validPw) {
                 res.status(403).send({
                     error: 'Wrong password'
                 })
@@ -58,7 +53,7 @@ module.exports = {
         }catch(err){
             console.log(err)
             res.status(500).send({
-                error:  'An error was occured',
+                error:  'An error was occured'
 
 
             })

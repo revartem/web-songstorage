@@ -51,7 +51,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="green" type="submit" dark @click="login">Login</v-btn>
+                <v-btn class="green" dark @click="login">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -80,18 +80,23 @@ export default {
     }
   },
   methods: {
-    login () {
-      this.error = ''
+    async login () {
       const vm = this
-      AuthenticationService.login({
+      await AuthenticationService.login({
         email: this.email,
         password: this.password
       }).then((value) => {
         vm.clearForm();
+
         return value
       })
         .catch(e => {
-          vm.error = e.response.data.error
+          if(e == null){
+            return
+          }else {
+            console.log(e)
+            vm.error = e.response.data.error
+          }
         })
     },
     clearForm () {

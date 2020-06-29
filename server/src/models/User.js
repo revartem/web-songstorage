@@ -1,20 +1,19 @@
-
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 function hashPassword(user) {
-    const SALT_FACTOR = 10
-
-    if (!user.changed('password')) {
-        return;
-    }
-    return bcrypt
-        .genSalt(SALT_FACTOR)
+    return bcrypt.genSalt(saltRounds)
         .then(salt => bcrypt.hash(user.password, salt))
         .then(hash => {
             user.setDataValue('password', hash)
+            return Promise.resolve();
         })
+        .catch(err => {
+            return Promise.reject(err)
+        });
 }
+
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
@@ -31,12 +30,12 @@ module.exports = (sequelize, DataTypes) => {
             hooks: {
                 beforeCreate: hashPassword,
                 beforeUpdate: hashPassword,
-                beforeSave: hashPassword
             }
         }
     )
 
     User.prototype.comparePassword = function (password) {
+        console.log(password, this.password)
         return bcrypt.compare(password, this.password);
     }
 

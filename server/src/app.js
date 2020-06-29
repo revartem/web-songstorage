@@ -15,7 +15,7 @@ app.use(morgan('combined'));
 
 require('./routes')(app)
 
-sequelize.sync().then(() => {
+sequelize.sync({force:true}).then(() => {
     app.listen(config.port)
     console.log(`server started on port ${config.port}`)
 })

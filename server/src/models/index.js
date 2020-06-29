@@ -13,16 +13,7 @@ const sequelize = new Sequelize(
 )
 
 
-// const modeli = [
-//     require('./User')(sequelize, Sequelize),
-// ]
-//
-// modeli.forEach(function(file) {
-//     var model = sequelize.import(path.join(__dirname, file));
-//     console.log("first model ", model)
-//     console.log(file, __dirname)
-//     // db[model.name] = model;
-// })
+
 
 fs.readdirSync(__dirname)
     .filter(function(file) {
@@ -35,15 +26,6 @@ fs.readdirSync(__dirname)
          db[model.name] = model;
      })
 
-
-// files.filter(e => e !== 'index.js')
-//     .forEach((file) => {
-//         console.log('File', file)
-//         const model =  sequelize.import(path.join(__dirname, file))
-//         console.log(model)
-//
-//         // db[model.name] = model
-//     })
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
