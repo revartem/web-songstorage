@@ -80,24 +80,28 @@ export default {
     }
   },
   methods: {
-    async login () {
+    login () {
       const vm = this
-      await AuthenticationService.login({
+      AuthenticationService.login({
         email: this.email,
         password: this.password
       }).then((value) => {
-        vm.clearForm();
 
+        vm.clearForm();
+        vm.positive = "User created!"
+        vm.$store.dispatch('setToken', value.data.token)
+        vm.$store.dispatch('setUser', value.data.user)
+        vm.$router.push('/songs')
         return value
       })
-        .catch(e => {
-          if(e == null){
-            return
-          }else {
-            console.log(e)
-            vm.error = e.response.data.error
-          }
-        })
+              .catch(e => {
+                if(e == null){
+                  return
+                }else {
+                  console.log(e)
+                  vm.error = e.response.data.error
+                }
+              })
     },
     clearForm () {
       this.email = '',

@@ -7,7 +7,7 @@
         <v-alert type="error" :value="error" dismissible
         >{{error}}</v-alert
         >
-        <v-alert type="positive" class="green" :value="positive" dismissible
+        <v-alert type="success" class="green" :value="positive" dismissible
         >{{positive}}</v-alert
         >
       </v-flex>
@@ -86,12 +86,14 @@ export default {
   methods: {
     register () {
       const vm = this
-      AuthenticationService.register({
+  AuthenticationService.register({
         email: this.email,
         password: this.password
       }).then((value) => {
         vm.clearForm();
-        vm.positive = 'User was successfully created'
+        vm.positive = "User created!"
+        vm.$store.dispatch('setToken', value.data.token)
+        vm.$store.dispatch('setUser', value.data.user)
         return value
       })
         .catch(e => {
