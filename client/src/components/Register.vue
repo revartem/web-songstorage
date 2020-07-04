@@ -33,8 +33,10 @@
                 <v-toolbar-title>Register</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form
+                aria-autocomplete="none">
                   <v-text-field
+                          autocomplete="off"
                     label="Email"
                     name="Email"
                     prepend-icon="mdi-account"

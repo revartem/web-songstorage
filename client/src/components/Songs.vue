@@ -1,35 +1,21 @@
 <template>
     <v-app id="inspire">
-
         <v-main>
-
-            <v-container
-                    class="fill-height"
-                    fluid
-            >
-                <v-row
-                        align="center"
-                        justify="center"
-                >
-                    <v-col
-                            cols="12"
-                            sm="8"
-                            md="4"
-                    >
-                        <v-card class="elevation-12">
-                            <v-toolbar
-                                    color="green"
-                                    dark
-                                    flat
-                            >
-                                <v-toolbar-title>Songs</v-toolbar-title>
-                            </v-toolbar>
-                            <v-card-text>
-                                <v-form>
-                                            <Panel/>
-                                </v-form>
-                            </v-card-text>
-                        </v-card>
+            <v-container class="fill-height" fluid>
+                <v-row align="center" justify="center">
+                    <v-col cols="8" >
+                        <Panel>
+                            <v-row align="center" justify="center">
+                                <v-col align="center" cols="3" >
+                            <h1>
+                                YO YO YO!
+                            </h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, in!
+                            </p>
+                                </v-col>
+                            </v-row>
+                        </Panel>
                     </v-col>
                 </v-row>
             </v-container>
@@ -42,7 +28,7 @@
 
     export default {
         name: "Songs",
-        components:{
+        components: {
             Panel
         }
     }

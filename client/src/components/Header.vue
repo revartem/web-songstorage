@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar  dense fixed  class="green--text" dark>
+    <v-toolbar  dense   class="green--text" dark>
         <v-toolbar-title >
            <v-btn
                    @click="toLogin" class="green--text home" text>

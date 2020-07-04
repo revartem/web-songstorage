@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <site-header></site-header>
+    <site-header ></site-header>
     <v-container fluid>
       <router-view></router-view>
     </v-container>
@@ -24,5 +24,7 @@ export default {
 };
 </script>
 <style scoped>
+
+  
 
 </style>
